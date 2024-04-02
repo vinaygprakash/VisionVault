@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#card{
+    display: flex;
+    flex-direction: column;
+}
+
+#image{
+    width: 15rem;
+    height: 15rem;
+    background-color: rgb(197, 197, 197);
+    border-radius: 20px;
+    overflow: hidden;
+}

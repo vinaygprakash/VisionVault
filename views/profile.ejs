@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="x-icon" href="https://static-00.iconduck.com/assets.00/pinterest-icon-2048x2048-os3lysf9.png">
+    <title>pinterest-clone</title>
+    <link rel="stylesheet" href="./stylesheets/profile.css" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  </head>
+  <body>
+    <% include ./partials/header.ejs %>
+    <div class="container">
+      <form hidden id="uploadform" action="/fileupload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image">
+      </form>
+      <div id="child-container">
+        <span class="add-profile" id="uploadicon">
+          <i class="ri-pencil-fill"></i>
+        </span>
+        <div id="profile-pic">
+          <img src="/images/uploads/<%= user.profileImage %>" style="width: 100%; height:100%; object-fit:cover;">
+        </div>
+        <div id="fullname"><span><%= user.fullname %></span></div>
+        <div id="username">@<%= user.username %></div>
+        <a href="/edit" id="edit">Edit Profile</a>
+        <a href="/add" id="add-images">Add Images</a>
+      </div>
+      <div id="cards" style="display:flex; flex-wrap:wrap; gap: 10px; margin-left:10px; margin-right:10px; padding-left:10px; padding-right:10px;">
+        <% user.posts.forEach(function(elm){ %>
+          <div id="card">
+            <div id="image">
+              <img src="/images/uploads/<%= elm.image %>" style="width: 100%; height:100%; object-fit:cover;">
+            </div>
+            <span style="font-weight:bold; font-size:larger; margin-left:10px;margin-top:5px; margin-bottom:2px"><%= elm.title %></span>
+            <span style=" margin-left:10px;color:rgb(169, 168, 168)"><%= user.posts.length %> Pins</span>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+    <script>
+      document.querySelector("#uploadicon").addEventListener("click",function(){
+        document.querySelector("#uploadform input").click();
+      })
+      document.querySelector("#uploadform input").addEventListener("change",function(){
+        document.querySelector("#uploadform").submit();
+      })
+    </script>
+  </body>
+</html>
